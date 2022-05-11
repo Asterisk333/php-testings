@@ -4,4 +4,6 @@
 $a = 22;
 $b = 44;
 
-echo $a+$b;
+$plus = $a + $b;
+
+echo $plus;
