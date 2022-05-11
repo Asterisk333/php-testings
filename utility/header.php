@@ -10,9 +10,8 @@
     <link rel="stylesheet" href="./style/variables.scss" type="text/scss">
 </head>
 <body>
-    <header>
     <div class="container">
-
-        <a>test</a>
-    </header>
+        <header>
+            <a>test</a>
+        </header>
 

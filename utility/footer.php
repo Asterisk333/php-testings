@@ -8,5 +8,6 @@
                 </tr>
             </table>
         </footer>
+</div>
     </body>
 </html>
