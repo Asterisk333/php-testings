@@ -1,9 +1,8 @@
 <?php
 //this is a file to test values and github commits
 
-$a = 22;
-$b = 44;
+function doadd($nbra,$nbrb){
+    echo $nbra+$nbrb;
+}
 
-$plus = $a + $b;
-
-echo $plus;
+doadd(1,3);
