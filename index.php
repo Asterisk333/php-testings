@@ -7,25 +7,29 @@
             'business'=>['title'=>'Geschäftsanfrage','selected'=>false],
             'others'=>['title'=>'Sonstiges','selected'=>false],
     ];
-    $formName = '';
-    $formMessage = '';
+    $isPostRequest =$_SERVER['REQUEST_METHOD'] == 'POST';
+    $errors = [];
 ?>
 
     <main>
         <h1>Test Page</h1>
         <!--alerts-->
+        <?php if($isPostRequest):?>
         <section class="container" id="alerts">
+            <?php if(count($errors) == 0):?>
             <div class="alert alert-success" role="alert">
                 Anfrage Versendet
             </div>
+            <?php endif;?>
             <div class="alert alert-danger" role="alert">
                 Ein Fehler ist aufgetreten
             </div>
         </section>
+        <?php endif;?>
         <!--end of alerts-->
         <!--contact form-->
         <section class="container" id="contactForm">
-            <form>
+            <form method="post">
                 <div class="card">
                     <div class="card-header">Kontakt</div>
                     <!--form content-->
@@ -63,12 +67,12 @@
                                     <?php
                                         foreach ($formOptions as $value=>$item):
                                         $selectString = '';
-                                        if($item['selected']){
+                                        if($item['selected'])
                                             $selectString = ' selected';
-                                        };
+
                                     ?>
                                     <option value="<?= $value?>"<?= $selectString?>><?= $item['title']?></option>
-                                    <? endforeach;?>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                         </div>
