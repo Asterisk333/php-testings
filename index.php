@@ -1,10 +1,26 @@
-    <?php include './utility/header.php'; ?>
+<?php
+    include './utility/header.php';
+    $formOptions = [
+            'help'=>['title'=>'Benötige allgemeine Hilfe','selected'=>false],
+            'feedback'=>['title'=>'Benötige feedback zum script','selected'=>false],
+            'bug'=>['title'=>'Fehler entdeckt','selected'=>false],
+            'business'=>['title'=>'Geschäftsanfrage','selected'=>false],
+            'others'=>['title'=>'Sonstiges','selected'=>false],
+    ];
+    $formName = '';
+    $formMessage = '';
+?>
 
     <main>
         <h1>Test Page</h1>
         <!--alerts-->
-        <section>
-
+        <section class="container" id="alerts">
+            <div class="alert alert-success" role="alert">
+                Anfrage Versendet
+            </div>
+            <div class="alert alert-danger" role="alert">
+                Ein Fehler ist aufgetreten
+            </div>
         </section>
         <!--end of alerts-->
         <!--contact form-->
@@ -12,6 +28,7 @@
             <form>
                 <div class="card">
                     <div class="card-header">Kontakt</div>
+                    <!--form content-->
                     <div class="card-body">
                         <div class="row form-group">
                             <div class="col-2">
@@ -41,16 +58,28 @@
                                 <label class="col-2 col-form-label" for="subject">Betreff:</label>
                             </div>
                             <div class="col">
-                                <input type="text" name="subject" id="subject" placeholder="Betreff" class="form-control">
+                                <select id="subject" name="subject" class="form-control">
+                                    <option>Bitte wählen</option>
+                                    <?php
+                                        foreach ($formOptions as $value=>$item):
+                                        $selectString = '';
+                                        if($item['selected']){
+                                            $selectString = ' selected';
+                                        };
+                                    ?>
+                                    <option value="<?= $value?>"<?= $selectString?>><?= $item['title']?></option>
+                                    <? endforeach;?>
+                                </select>
                             </div>
                         </div>
                         <div class="row form-group">
                             <label class="col-2 col-form-label" for="message">Nachricht:</label>
                         <div>
-                            <textarea id="message" class="form-control" rows="3"></textarea>
+                            <textarea id="message" name="message" class="form-control" rows="3"></textarea>
                         </div>
                         </div>
                     </div>
+                    <!--end form content-->
                     <div class="card-footer">
                         <button class="btn btn-primary">Anfrage senden</button>
                         <!--<a href="/" class="btn btn-danger">Abbrechen</a>-->
