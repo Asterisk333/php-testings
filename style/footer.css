@@ -1,0 +1,18 @@
+footer {
+    background-color: #b8a3c9;
+    height: 5vh;
+    width: 98vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.3%;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.footerText {
+    color: #2e2e2e;
+    Font-Family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 8;
+    font-size: 2vh;
+    margin-left: 5px;
+    margin-top: 3px;
+}

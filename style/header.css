@@ -1,0 +1,63 @@
+header {
+    height: 8%;
+    background-color: #b8a3c9;
+    border-radius: 5px 5px 5px 5px;
+    margin-bottom: 1px;
+}
+
+.navigation {
+    height: 7vh;
+}
+
+table {
+    width: 100%;
+}
+
+tr {
+    width: 100%;
+    Margin: 1%;
+}
+
+td {
+    width: 5%;
+}
+
+#filler {
+    width: auto;
+}
+
+/*Button for Servers*/
+.sbutton {
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #2f3236;
+    border-radius: 10px;
+    min-width: 200px;
+    float: left;
+}
+.sbutton:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#server {
+    margin-left: 5vw;
+    margin-right: 2vw;
+    min-width: 30vw;
+    min-height: 5vh;
+    padding: 1vh;
+    font-size: 3vh;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #2f3236;
+    border-radius: 10px;
+    float: right;
+}
+
+#server:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
