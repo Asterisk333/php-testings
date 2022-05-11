@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../scss/header.scss" type="text/scss">
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid bg-dark">
         <header>
             <ul class="nav nav-pills">
                 <li class="nav-item">
