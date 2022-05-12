@@ -1,5 +1,8 @@
 <?php
+    //includes
     include './utility/header.php';
+
+    //eingabe
     $formOptions = [
             'help'=>['title'=>'Benötige allgemeine Hilfe','selected'=>false],
             'feedback'=>['title'=>'Benötige feedback zum script','selected'=>false],
@@ -7,8 +10,27 @@
             'business'=>['title'=>'Geschäftsanfrage','selected'=>false],
             'others'=>['title'=>'Sonstiges','selected'=>false],
     ];
-    $isPostRequest =$_SERVER['REQUEST_METHOD'] == 'POST';
+    $isPostRequest = $_SERVER['REQUEST_METHOD'] == 'POST';
     $errors = [];
+    $name = '';
+    $message = '';
+    $subject = '';
+    $mrsIsSelected = false;
+    $mrIsSelected = false;
+
+    //Verarbeitung
+    if($isPostRequest){
+        $name = filter_input(INPUT_POST,'name',FILTER_SANITIZE_STRING);
+        $message = filter_input(INPUT_POST,'message',FILTER_SANITIZE_STRING);
+        $subject = filter_input(INPUT_POST,'name',FILTER_SANITIZE_STRING);
+
+        $mrsIsSelected = filter_input(INPUT_POST,'salutation') === 'mrs';
+        $mrIsSelected = filter_input(INPUT_POST,'salutation') === 'mr';
+
+    }
+
+    //ausgabe
+
 ?>
 
     <main>
@@ -21,15 +43,17 @@
                 Anfrage Versendet
             </div>
             <?php endif;?>
+            <?php if(count($errors)>0):?>
             <div class="alert alert-danger" role="alert">
                 Ein Fehler ist aufgetreten
             </div>
+            <?php endif;?>
         </section>
         <?php endif;?>
         <!--end of alerts-->
         <!--contact form-->
         <section class="container" id="contactForm">
-            <form method="post">
+            <form>
                 <div class="card">
                     <div class="card-header">Kontakt</div>
                     <!--form content-->
@@ -69,7 +93,6 @@
                                         $selectString = '';
                                         if($item['selected'])
                                             $selectString = ' selected';
-
                                     ?>
                                     <option value="<?= $value?>"<?= $selectString?>><?= $item['title']?></option>
                                     <?php endforeach;?>
