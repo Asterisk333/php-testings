@@ -19,15 +19,54 @@
     $mrIsSelected = false;
 
     //Verarbeitung
-    if($isPostRequest){
-        $name = filter_input(INPUT_POST,'name',FILTER_SANITIZE_STRING);
-        $message = filter_input(INPUT_POST,'message',FILTER_SANITIZE_STRING);
-        $subject = filter_input(INPUT_POST,'name',FILTER_SANITIZE_STRING);
+if($isPostRequest){
+    $name = filter_input(INPUT_POST,'name',FILTER_SANITIZE_STRING);
+    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+    $subject = filter_input(INPUT_POST, 'subject', FILTER_SANITIZE_STRING);
 
-        $mrsIsSelected = filter_input(INPUT_POST,'salutation') === 'mrs';
-        $mrIsSelected = filter_input(INPUT_POST,'salutation') === 'mr';
+    $mrsIsSelected = filter_input(INPUT_POST, 'salutation') === 'mrs';
+    $mrIsSelected = filter_input(INPUT_POST, 'salutation') === 'mr';
+    $isRobot = filter_input(INPUT_POST, 'robot') === 'on';
 
+    if(isset($options[$subject])){
+        $options[$subject]['selected'] = true;
     }
+
+    if(!$name){
+        $errors[] = 'Name ist leer';
+    }
+    if (!$mrIsSelected && !$mrsIsSelected) {
+        $errors[] = 'Anrede auswählen';
+    }
+    if (!$message) {
+        $errors[] = 'Bitte eine Nachricht hinterlassen';
+    }
+    if (!isset($options[$subject])) {
+        $errors[] = 'Bitte betreff auswählen';
+    }
+    if(!$isRobot && count($errors) === 0){
+        $salutation = 'Mrs';
+        if ($mrIsSelected) {
+            $salutation = 'Mr';
+        }
+        $data = [
+            'salutation' => $salutation,
+            'name' => $name,
+            'subject'=>$options[$subject]['title'],
+            'message'=>$message
+        ];
+        file_put_contents('datei.txt', serialize($data) . ';;;', FILE_APPEND);
+
+        $_POST = [];
+        $mrIsSelected = false;
+        $mrsIsSelected = false;
+        $options[$subject]['selected'] = false;
+        $subject = null;
+        $isRobot = false;
+        $name = '';
+        $message = '';
+    }
+}
 
     //ausgabe
 
@@ -46,6 +85,12 @@
             <?php if(count($errors)>0):?>
             <div class="alert alert-danger" role="alert">
                 Ein Fehler ist aufgetreten
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <?php foreach($errors as $errorMessage):?>
+                    <p><?= $errorMessage ?></p>
+                <?php endforeach;?>
             </div>
             <?php endif;?>
         </section>
