@@ -1,11 +1,10 @@
 <?php
-$servername = "127.0.0.1";
-$username = "kessis";
-$password = "myPassword";
-$dbname = "MY_APP_DB";
+include "./controller/auth.php";
+
+$login = readauth();
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli('localhost', $login['kessis']['name'], $login['kessis']['pword'], $login['kessis']['database']);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
