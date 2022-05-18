@@ -1,3 +1,13 @@
+<?php
+$songs = array();
+foreach (new DirectoryIterator('./songs') as $fileInfo) {
+    if($fileInfo->isDot() || !$fileInfo->isFile()) continue;
+   # $songs[] =
+        $fileInfo->getFilename();
+}
+echo $songs;
+?>
+
 <html>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
